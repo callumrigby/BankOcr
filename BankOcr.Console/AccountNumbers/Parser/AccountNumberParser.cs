@@ -24,38 +24,55 @@ namespace BankOcr.Console.AccountNumbers.Parser
             var digitalAccountNumbers = new List<DigitalAccountNumber>();
             for (int i = 0; i < lines.Length; i += EntryNumberOfLines)
             {
-                for (int j = 0; j < EntryNumberOfLines - 1; j++)
-                {
-                    if (!ValidateSymbolLine(lines[i + j]))
-                    {
-                        throw new Exception($"All lines containing symbols must be {EntrySymbolLineLength} characters long. Line {i + j + 1}.");
-                    }
-                }
-
-                if (!ValidateTerminatingLine(lines[i + EntryNumberOfLines - 1]))
-                {
-                    throw new Exception($"All entry terminating lines must be blank. Line {i + EntryNumberOfLines}.");
-                }
-
-                var digitalCharacters = new List<DigitalCharacter>();
-                for (int j = 0; j < EntrySymbolLineLength; j += SymbolLength)
-                {
-                    var digitalCharacter = new DigitalCharacter(
-                        lines[i].Substring(j, SymbolLength),
-                        lines[i + 1].Substring(j, SymbolLength),
-                        lines[i + 2].Substring(j, SymbolLength)
-                    );
-                    digitalCharacters.Add(digitalCharacter);
-                }
-
+                ValidateEntry(lines, i);
+                var digitalCharacters = ParseEntry(lines, i);
                 digitalAccountNumbers.Add(new DigitalAccountNumber(digitalCharacters));
             }
 
             return digitalAccountNumbers;
         }
 
+        private static void ValidateEntry(string[] lines, int offset)
+        {
+            ValidateAllSymbolLines(lines, offset);
+
+            if (!ValidateTerminatingLine(lines[offset + EntryNumberOfLines - 1]))
+            {
+                throw new Exception($"All entry terminating lines must be blank. Line {offset + EntryNumberOfLines}.");
+            }
+        }
+
+        private static void ValidateAllSymbolLines(string[] lines, int offset)
+        {
+            for (int i = 0; i < EntryNumberOfLines - 1; i++)
+            {
+                if (!ValidateSymbolLine(lines[offset + i]))
+                {
+                    throw new Exception($"All lines containing symbols must be {EntrySymbolLineLength} characters long. Line {offset + i + 1}.");
+                }
+            }
+        }
+
         private static bool ValidateSymbolLine(string line) => line.Length == EntrySymbolLineLength;
 
         private static bool ValidateTerminatingLine(string line) => line == string.Empty;
+
+        private static List<DigitalCharacter> ParseEntry(string[] lines, int offset)
+        {
+            var digitalCharacters = new List<DigitalCharacter>();
+            for (int i = 0; i < EntrySymbolLineLength; i += SymbolLength)
+            {
+                var digitalCharacter = new DigitalCharacter(
+                    ExtractSymbol(lines[offset], i),
+                    ExtractSymbol(lines[offset + 1], i),
+                    ExtractSymbol(lines[offset + 2], i)
+                );
+                digitalCharacters.Add(digitalCharacter);
+            }
+
+            return digitalCharacters;
+        }
+
+        private static string ExtractSymbol(string line, int index) => line.Substring(index, SymbolLength);
     }
 }

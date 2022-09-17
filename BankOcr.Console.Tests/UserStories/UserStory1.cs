@@ -1,4 +1,4 @@
-﻿namespace BankOcrKata
+﻿namespace BankOcr.Console.Tests.UserStories
 {
     [TestFixture]
     public class UserStory1

@@ -1,4 +1,6 @@
-﻿namespace BankOcr.Console.Tests.UserStories
+﻿using BankOcr.Console.AccountNumbers.Validator;
+
+namespace BankOcr.Console.Tests.UserStories
 {
     [TestFixture]
     public class UserStory2
@@ -11,7 +13,9 @@
         [TestCase("012345678", false)]
         public void Tests(string accountNumber, bool isValid)
         {
-            Assert.Fail();
+            var result = AccountNumberValidator.Validate(accountNumber);
+
+            Assert.That(result, Is.EqualTo(isValid));
         }
     }
 }

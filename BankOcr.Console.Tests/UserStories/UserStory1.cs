@@ -1,13 +1,15 @@
-﻿namespace BankOcr.Console.Tests.UserStories
+﻿using BankOcr.Console.AccountNumbers.Reader;
+
+namespace BankOcr.Console.Tests.UserStories
 {
     [TestFixture]
     public class UserStory1
     {
         [TestCase(@"
- _  _  _  _  _  _  _  _  _
+ _  _  _  _  _  _  _  _  _ 
 | || || || || || || || || |
 |_||_||_||_||_||_||_||_||_|", "000000000")]
-        [TestCase(@"                         
+        [TestCase(@"
                            
   |  |  |  |  |  |  |  |  |
   |  |  |  |  |  |  |  |  |", "111111111")]
@@ -16,7 +18,7 @@
  _| _| _| _| _| _| _| _| _|
 |_ |_ |_ |_ |_ |_ |_ |_ |_ ", "222222222")]
         [TestCase(@"
- _  _  _  _  _  _  _  _  _
+ _  _  _  _  _  _  _  _  _ 
  _| _| _| _| _| _| _| _| _|
  _| _| _| _| _| _| _| _| _|", "333333333")]
         [TestCase(@"
@@ -49,7 +51,11 @@
   ||_  _|  | _||_|  ||_| _|", "123456789")]
         public void Tests(string input, string expectedResult)
         {
-            Assert.Fail();
+            var formattedInput = string.Concat(input.TrimStart('\n'), '\n');
+            var accountNumbers = AccountNumberReader.Read(formattedInput).ToList();
+
+            Assert.That(accountNumbers, Has.Count.EqualTo(1));
+            Assert.That(accountNumbers[0], Is.EqualTo(expectedResult));
         }
     }
 }

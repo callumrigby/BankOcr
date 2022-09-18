@@ -2,7 +2,7 @@ namespace BankOcr.Console.AccountNumbers.Validator
 {
     public class AccountNumberValidator
     {
-        public static bool Validate(string accountNumber)
+        public static bool ValidateChecksum(string accountNumber)
         {
             if (accountNumber.Length != 9)
             {

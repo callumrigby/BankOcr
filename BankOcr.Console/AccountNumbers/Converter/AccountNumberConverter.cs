@@ -6,7 +6,7 @@ namespace BankOcr.Console.AccountNumbers.Converter
 {
     public class AccountNumberConverter
     {
-        public static string Convert(DigitalAccountNumber digitalAccountNumber)
+        public static AccountNumber Convert(DigitalAccountNumber digitalAccountNumber)
         {
             var accountNumberBuilder = new StringBuilder();
             var accountNumberCharacters = digitalAccountNumber.ToList();
@@ -15,15 +15,11 @@ namespace BankOcr.Console.AccountNumbers.Converter
                 DigitalCharacter digitalCharacter = accountNumberCharacters[i];
                 var (_, value) = Digits.NumericValues.FirstOrDefault((t) => CompareDigitalCharacters(t.character, digitalCharacter));
 
-                if (value is null)
-                {
-                    throw new Exception($"Character at position {i + 1} is not a valid digit. Value:\n{digitalCharacter.Line1}\n{digitalCharacter.Line2}\n{digitalCharacter.Line3}");
-                }
-
-                accountNumberBuilder.Append(value);
+                var digit = value is null ? "?" : value;
+                accountNumberBuilder.Append(digit);
             }
 
-            return accountNumberBuilder.ToString();
+            return new AccountNumber(accountNumberBuilder.ToString());
         }
 
         private static bool CompareDigitalCharacters(DigitalCharacter character1, DigitalCharacter character2) =>

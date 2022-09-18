@@ -55,7 +55,7 @@ namespace BankOcr.Console.Tests.UserStories
             var accountNumbers = AccountNumberReader.Read(formattedInput).ToList();
 
             Assert.That(accountNumbers, Has.Count.EqualTo(1));
-            Assert.That(accountNumbers[0], Is.EqualTo(expectedResult));
+            Assert.That(accountNumbers[0].Value, Is.EqualTo(expectedResult));
         }
     }
 }

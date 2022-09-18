@@ -13,7 +13,7 @@ namespace BankOcr.Console.Tests.UserStories
         [TestCase("012345678", false)]
         public void Tests(string accountNumber, bool isValid)
         {
-            var result = AccountNumberValidator.Validate(accountNumber);
+            var result = AccountNumberValidator.ValidateChecksum(accountNumber);
 
             Assert.That(result, Is.EqualTo(isValid));
         }

@@ -49,7 +49,7 @@ namespace BankOcr.Console.Tests.Converter
         {
             var numericAccountNumber = AccountNumberConverter.Convert(digitalAccountNumber);
 
-            Assert.That(numericAccountNumber, Is.EqualTo(expected));
+            Assert.That(numericAccountNumber.Value, Is.EqualTo(expected));
         }
     }
 }

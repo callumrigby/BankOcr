@@ -7,30 +7,30 @@ namespace BankOcr.Console.Tests.Converter
 {
     class TestCases : IEnumerable
     {
-        private readonly static DigitalAccountNumber TestCase1 = new(new List<DigitalCharacter>
+        private readonly static DigitalAccountNumber TestCase1 = new(new List<DigitalAccountNumberDigit>
         {
-            Digits.One,
-            Digits.Two,
-            Digits.Three,
-            Digits.Four,
-            Digits.Five,
-            Digits.Six,
-            Digits.Seven,
-            Digits.Eight,
-            Digits.Nine
+            new DigitalAccountNumberDigit(Digits.One),
+            new DigitalAccountNumberDigit(Digits.Two),
+            new DigitalAccountNumberDigit(Digits.Three),
+            new DigitalAccountNumberDigit(Digits.Four),
+            new DigitalAccountNumberDigit(Digits.Five),
+            new DigitalAccountNumberDigit(Digits.Six),
+            new DigitalAccountNumberDigit(Digits.Seven),
+            new DigitalAccountNumberDigit(Digits.Eight),
+            new DigitalAccountNumberDigit(Digits.Nine)
         });
 
-        private readonly static DigitalAccountNumber TestCase2 = new(new List<DigitalCharacter>
+        private readonly static DigitalAccountNumber TestCase2 = new(new List<DigitalAccountNumberDigit>
         {
-            Digits.Nine,
-            Digits.Eight,
-            Digits.Seven,
-            Digits.Six,
-            Digits.Five,
-            Digits.Four,
-            Digits.Three,
-            Digits.Two,
-            Digits.One
+            new DigitalAccountNumberDigit(Digits.Nine),
+            new DigitalAccountNumberDigit(Digits.Eight),
+            new DigitalAccountNumberDigit(Digits.Seven),
+            new DigitalAccountNumberDigit(Digits.Six),
+            new DigitalAccountNumberDigit(Digits.Five),
+            new DigitalAccountNumberDigit(Digits.Four),
+            new DigitalAccountNumberDigit(Digits.Three),
+            new DigitalAccountNumberDigit(Digits.Two),
+            new DigitalAccountNumberDigit(Digits.One)
         });
 
         public IEnumerator GetEnumerator()

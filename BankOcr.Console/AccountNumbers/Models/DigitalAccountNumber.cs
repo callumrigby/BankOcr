@@ -4,7 +4,7 @@ namespace BankOcr.Console.AccountNumbers.Models
     {
         private const int AccountNumberLength = 9;
 
-        public DigitalAccountNumber(List<DigitalCharacter> digitalCharacters)
+        public DigitalAccountNumber(List<DigitalAccountNumberDigit> digitalCharacters)
         {
             if (digitalCharacters.Count != AccountNumberLength)
             {
@@ -22,17 +22,17 @@ namespace BankOcr.Console.AccountNumbers.Models
             Position9 = digitalCharacters[8];
         }
 
-        public DigitalCharacter Position1 { get; set; }
-        public DigitalCharacter Position2 { get; set; }
-        public DigitalCharacter Position3 { get; set; }
-        public DigitalCharacter Position4 { get; set; }
-        public DigitalCharacter Position5 { get; set; }
-        public DigitalCharacter Position6 { get; set; }
-        public DigitalCharacter Position7 { get; set; }
-        public DigitalCharacter Position8 { get; set; }
-        public DigitalCharacter Position9 { get; set; }
+        public DigitalAccountNumberDigit Position1 { get; set; }
+        public DigitalAccountNumberDigit Position2 { get; set; }
+        public DigitalAccountNumberDigit Position3 { get; set; }
+        public DigitalAccountNumberDigit Position4 { get; set; }
+        public DigitalAccountNumberDigit Position5 { get; set; }
+        public DigitalAccountNumberDigit Position6 { get; set; }
+        public DigitalAccountNumberDigit Position7 { get; set; }
+        public DigitalAccountNumberDigit Position8 { get; set; }
+        public DigitalAccountNumberDigit Position9 { get; set; }
 
-        public List<DigitalCharacter> ToList() => new()
+        public List<DigitalAccountNumberDigit> ToList() => new()
         {
             Position1,
             Position2,

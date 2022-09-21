@@ -26,15 +26,15 @@ namespace BankOcr.Console.Tests.Parser
             var digitalAccountNumbers = AccountNumberParser.Parse(formattedInput);
 
             Assert.That(digitalAccountNumbers, Has.Count.EqualTo(1));
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position1, DigitalCharacterOne);
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position2, DigitalCharacterTwo);
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position3, DigitalCharacterThree);
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position4, DigitalCharacterFour);
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position5, DigitalCharacterFive);
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position6, DigitalCharacterSix);
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position7, DigitalCharacterSeven);
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position8, DigitalCharacterEight);
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position9, DigitalCharacterNine);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position1.OriginalValue, DigitalCharacterOne);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position2.OriginalValue, DigitalCharacterTwo);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position3.OriginalValue, DigitalCharacterThree);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position4.OriginalValue, DigitalCharacterFour);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position5.OriginalValue, DigitalCharacterFive);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position6.OriginalValue, DigitalCharacterSix);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position7.OriginalValue, DigitalCharacterSeven);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position8.OriginalValue, DigitalCharacterEight);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position9.OriginalValue, DigitalCharacterNine);
         }
 
         [TestCase(@"
@@ -51,25 +51,25 @@ namespace BankOcr.Console.Tests.Parser
             var digitalAccountNumbers = AccountNumberParser.Parse(formattedInput);
 
             Assert.That(digitalAccountNumbers, Has.Count.EqualTo(2));
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position1, DigitalCharacterOne);
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position2, DigitalCharacterTwo);
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position3, DigitalCharacterThree);
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position4, DigitalCharacterFour);
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position5, DigitalCharacterFive);
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position6, DigitalCharacterSix);
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position7, DigitalCharacterSeven);
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position8, DigitalCharacterEight);
-            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position9, DigitalCharacterNine);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position1.OriginalValue, DigitalCharacterOne);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position2.OriginalValue, DigitalCharacterTwo);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position3.OriginalValue, DigitalCharacterThree);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position4.OriginalValue, DigitalCharacterFour);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position5.OriginalValue, DigitalCharacterFive);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position6.OriginalValue, DigitalCharacterSix);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position7.OriginalValue, DigitalCharacterSeven);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position8.OriginalValue, DigitalCharacterEight);
+            AssertDigitalCharacterLines(digitalAccountNumbers[0].Position9.OriginalValue, DigitalCharacterNine);
 
-            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position1, DigitalCharacterNine);
-            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position2, DigitalCharacterEight);
-            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position3, DigitalCharacterSeven);
-            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position4, DigitalCharacterSix);
-            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position5, DigitalCharacterFive);
-            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position6, DigitalCharacterFour);
-            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position7, DigitalCharacterThree);
-            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position8, DigitalCharacterTwo);
-            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position9, DigitalCharacterOne);
+            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position1.OriginalValue, DigitalCharacterNine);
+            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position2.OriginalValue, DigitalCharacterEight);
+            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position3.OriginalValue, DigitalCharacterSeven);
+            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position4.OriginalValue, DigitalCharacterSix);
+            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position5.OriginalValue, DigitalCharacterFive);
+            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position6.OriginalValue, DigitalCharacterFour);
+            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position7.OriginalValue, DigitalCharacterThree);
+            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position8.OriginalValue, DigitalCharacterTwo);
+            AssertDigitalCharacterLines(digitalAccountNumbers[1].Position9.OriginalValue, DigitalCharacterOne);
         }
 
         private static void AssertDigitalCharacterLines(DigitalCharacter actual, DigitalCharacter expected)

@@ -10,17 +10,17 @@ namespace BankOcr.Console.Tests.UserStories
 | || || || || || || || || |
 |_||_||_||_||_||_||_||_||_|", "000000000")]
         [TestCase(@"
-                           
+ _                         
   |  |  |  |  |  |  |  |  |
-  |  |  |  |  |  |  |  |  |", "111111111")]
+  |  |  |  |  |  |  |  |  |", "711111111")] // Changed from original test case values after implementing auto-correction
         [TestCase(@"
  _  _  _  _  _  _  _  _  _ 
  _| _| _| _| _| _| _| _| _|
 |_ |_ |_ |_ |_ |_ |_ |_ |_ ", "222222222")]
         [TestCase(@"
  _  _  _  _  _  _  _  _  _ 
- _| _| _| _| _| _| _| _| _|
- _| _| _| _| _| _| _| _| _|", "333333333")]
+ _| _| _| _||_| _| _| _| _|
+ _| _| _| _| _| _| _| _| _|", "333393333")] // Changed from original test case values after implementing auto-correction
         [TestCase(@"
                            
 |_||_||_||_||_||_||_||_||_|
@@ -34,9 +34,9 @@ namespace BankOcr.Console.Tests.UserStories
 |_ |_ |_ |_ |_ |_ |_ |_ |_ 
 |_||_||_||_||_||_||_||_||_|", "666666666")]
         [TestCase(@"
- _  _  _  _  _  _  _  _  _ 
+ _  _  _  _  _  _     _  _ 
   |  |  |  |  |  |  |  |  |
-  |  |  |  |  |  |  |  |  |", "777777777")]
+  |  |  |  |  |  |  |  |  |", "777777177")] // Changed from original test case values after implementing auto-correction
         [TestCase(@"
  _  _  _  _  _  _  _  _  _ 
 |_||_||_||_||_||_||_||_||_|

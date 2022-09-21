@@ -1,4 +1,6 @@
+using System.Text;
 using BankOcr.Console.AccountNumbers.Models;
+using BankOcr.Console.Utils;
 
 namespace BankOcr.Console.AccountNumbers.Parser
 {
@@ -57,22 +59,51 @@ namespace BankOcr.Console.AccountNumbers.Parser
 
         private static bool ValidateTerminatingLine(string line) => line == string.Empty;
 
-        private static List<DigitalCharacter> ParseEntry(string[] lines, int offset)
+        private static List<DigitalAccountNumberDigit> ParseEntry(string[] lines, int offset)
         {
-            var digitalCharacters = new List<DigitalCharacter>();
+            var digits = new List<DigitalAccountNumberDigit>();
             for (int i = 0; i < EntrySymbolLineLength; i += SymbolLength)
             {
-                var digitalCharacter = new DigitalCharacter(
-                    ExtractSymbol(lines[offset], i),
-                    ExtractSymbol(lines[offset + 1], i),
-                    ExtractSymbol(lines[offset + 2], i)
+                string line1 = ExtractSymbol(lines[offset], i);
+                string line2 = ExtractSymbol(lines[offset + 1], i);
+                string line3 = ExtractSymbol(lines[offset + 2], i);
+                var originalValue = new DigitalCharacter(
+                    line1,
+                    line2,
+                    line3
                 );
-                digitalCharacters.Add(digitalCharacter);
+
+                var line1PossibleSymbols = GetPossibleSymbols(line1);
+                var line2PossibleSymbols = GetPossibleSymbols(line2);
+                var line3PossibleSymbols = GetPossibleSymbols(line3);
+                var line1ChangedCharacters = line1PossibleSymbols.Select((s) => new DigitalCharacter(s, line2, line3));
+                var line2ChangedCharacters = line2PossibleSymbols.Select((s) => new DigitalCharacter(line1, s, line3));
+                var line3ChangedCharacters = line3PossibleSymbols.Select((s) => new DigitalCharacter(line1, line2, s));
+                var possibleValues = line1ChangedCharacters.Concat(line2ChangedCharacters).Concat(line3ChangedCharacters).ToList();
+
+                var digit = new DigitalAccountNumberDigit(originalValue, possibleValues);
+                digits.Add(digit);
             }
 
-            return digitalCharacters;
+            return digits;
         }
 
         private static string ExtractSymbol(string line, int index) => line.Substring(index, SymbolLength);
+
+        private static List<string> GetPossibleSymbols(string line)
+        {
+            var possibleSymbols = new List<string>();
+            var symbolCharacters = new List<char> { ' ', '_', '|' };
+            for (int i = 0; i < SymbolLength; i++)
+            {
+                var substituteCharacters = symbolCharacters.Where((c) => c != line[i]);
+                foreach (var character in substituteCharacters)
+                {
+                    possibleSymbols.Add(line.ReplaceAt(i, character));
+                }
+            }
+
+            return possibleSymbols;
+        }
     }
 }
